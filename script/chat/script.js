@@ -73,13 +73,20 @@ function printmsg(message){
 
 	msgspan.setAttribute('class', 'msg'); //msgspan의 class설정
 	timespan.setAttribute('class', 'time'); //msgspan의 class설정
+    let today = new Date();   
+
+let year = today.getFullYear(); // 년도
+let month = today.getMonth() + 1;  // 월
+let date = today.getDate();  // 날짜
 
 	const msg = document.createTextNode(message.data);
 	const msgtime = new Date(message.timestamp * 1000); //msg작성한 시간 변수에 저장
-	const msgtimetext = document.createTextNode(msgtime.getHours()+":"+(msgtime.getMinutes() >= 10 ? msgtime.getMinutes() : "0" + msgtime.getMinutes())); //10시 9분 -> 10:09
+	const msgtimetext = document.createTextNode(year + '/' + month + '/' + date+" "+msgtime.getHours()+":"+(msgtime.getMinutes() >= 10 ? msgtime.getMinutes() : "0" + msgtime.getMinutes())); //10시 9분 -> 10:09
+
 
 	msgspan.appendChild(msg);
 	timespan.append(msgtimetext);
+    
 	
 	msgdiv.appendChild(msgspan); //만든 div에 message넣기
 	msgdiv.appendChild(timespan);
@@ -92,18 +99,8 @@ window.onload = function() {
     name.value = localStorage.getItem("name")
 }
 document.getElementById("sendbtn").addEventListener('click', save);
-/*        document.getElementById("btn").addEventListener('click', checkbot);*/
-        
-/*if (localStorage.getItem("blockip") == "1") {
-                var body = document.querySelector('body')
-                var form = document.querySelectorAll('form')
-                body.style.visibility = 'hidden'
-                alert("운관시 제출 차단 유저(봇)입니다.")
-                body.style.visibility = 'hidden'
-                form.style.visibility = 'hidden'
-            }*/
         function save() {
             var name = document.getElementById('nameinput')
             localStorage.setItem("name", name.value)
             button.onclick = buttonClickHandler;
-        } //기장이름 저장
+        } //이름 저장
